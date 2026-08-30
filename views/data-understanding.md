@@ -13,9 +13,10 @@ kernelspec:
 ---
 
 # Data Understanding
-## Pengumpulan Data
-Langkah pertama yaitu mengumpulkan data polutan udara NO₂ dan CO. Dataset ini mengambil dari platform satelit [Copernicus Data Space Ecosystem](https://dataspace.copernicus.eu/).
 
+## Pengumpulan Data
+
+Langkah pertama yaitu mengumpulkan data polutan udara NO₂ dan CO. Dataset ini mengambil dari platform satelit [Copernicus Data Space Ecosystem](https://dataspace.copernicus.eu/).
 
 ### Install Library & Autentikasi
 
@@ -41,7 +42,6 @@ Visit (link authentikasi) 📋 to authenticate.
 ✅ Authorized successfully
 Authenticated using device code flow.
 ```
-
 
 ### Pengambilan Data NO₂ dan CO Area Wilayah Lamongan
 
@@ -84,11 +84,13 @@ s5 = connection.load_collection(
     bands=["NO2"],
 )
 ```
-Proses di jalankan batch job di server openEO, dan hasilnya dapat dipantau  melalui openEO Web Editor. [openEO editor](https://editor.openeo.org/?server=https%3A%2F%2Fopeneo.dataspace.copernicus.eu%2Fopeneo%2F1.2). Setelah diproses oleh server, output akan otomatis diunduh dalam format **CSV**.
+
+Proses di jalankan batch job di server openEO, dan hasilnya dapat dipantau melalui openEO Web Editor. [openEO editor](https://editor.openeo.org/?server=https%3A%2F%2Fopeneo.dataspace.copernicus.eu%2Fopeneo%2F1.2). Setelah diproses oleh server, output akan otomatis diunduh dalam format **CSV**.
 
 ![Grafik Data](../img/openeo_editor.png)
 
 ### Hasil CSV
+
 Disini memuat file CSV CO dan NO2 yang telah menggunakan pustaka Pandas. Dan disini kita hanya akan menampilkan 5 data teratas saja.
 
 1. CO
@@ -101,6 +103,8 @@ df = pd.read_csv("../../data/CO_lamongan.csv")
 df.head(5)
 ```
 
+![Grafik Data](../img/data_co.png)
+
 2. NO2
 
 ```{code-cell}
@@ -109,15 +113,19 @@ df = pd.read_csv("../../data/No2_lamongan.csv")
 df.head(5)
 ```
 
-## Data Kosong (Missing Values) 
+![Grafik Data](../img/data_no2.png)
+
+## Data Kosong (Missing Values)
 
 Ketidaklengkapan data atau _missing values_ merujuk pada situasi di mana titik-titik pengamatan tertentu tidak memiliki nilai ukur yang tercatat. Dalam konteks observasi satelit berbasis deret waktu, hilangnya data tersebut adalah hal yang lumrah. Pemicu utamanya berkisar dari halangan fisis seperti awan tebal yang menutupi area pandang sensor, hingga pola pergerakan orbit satelit yang menyebabkan absennya perekaman wilayah tersebut pada hari-hari tertentu. Mengenali rumpang data ini adalah prasyarat mutlak sebelum proses analisis dieksekusi.
 
 Disini kita mengecek dua bentuk _missing values_:
+
 1. **Tanggal yang Hilang**: Memastikan apakah ada urutan hari yang terlewat (bolong) dari rentang waktu awal hingga akhir (24 Agustus 2025 - 24 Agustus 2026).
 2. **Data yang Hilang**: Memeriksa jumlah nilai polutan yang kosong (`NaN`) pada record tanggal yang sudah terekam.
 
 ### Tanggal Yang Hilang
+
 1. CO
 
 ```{code-cell}
@@ -138,7 +146,6 @@ print(f"Jumlah hari missing: {len(missing_dates)}")
 print("Daftar tanggal missing:")
 print(missing_dates)
 ```
-
 
 2. NO₂
 
@@ -174,12 +181,12 @@ print(missing_value)
 ```
 
 Implementasi pada tools `Orange Data Mining`
+
 ```{image} ../img/missing_co.png
 :alt: Grafik Data
 :width: 100%
 :align: center
 ```
-
 
 2. NO₂
 
@@ -196,7 +203,6 @@ Implementasi pada tools `Orange Data Mining`
 :width: 100%
 :align: center
 ```
-
 
 ## Outliers
 
@@ -229,7 +235,6 @@ Implementasi pada tools `Orange Data Mining`
 :align: center
 ```
 
-
 2. NO₂
 
 ```{code-cell}
@@ -254,4 +259,3 @@ Implementasi pada tools `Orange Data Mining`
 :width: 100%
 :align: center
 ```
-
