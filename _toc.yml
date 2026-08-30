@@ -2,9 +2,8 @@
 # Learn more at https://jupyterbook.org/customize/toc.html
 
 format: jb-book
-root: intro
+root: views/initial
 chapters:
-- file: views
-  sections:
-  - file: views/bussiness-understanding
-  - file: views/data-understanding
+- file: views/polutan
+- file: views/busssiness-understanding
+- file: views/data-understanding
