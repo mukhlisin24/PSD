@@ -30,7 +30,16 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Build Jupyter Book
-        run: jupyter-book build .
+        run: jupyter-book build . -v
+
+      - name: Debug - list build output
+        run: |
+          echo "=== Root directory ==="
+          ls -la
+          echo "=== _build directory ==="
+          ls -la _build/ || echo "_build NOT FOUND"
+          echo "=== _build/html ==="
+          ls -la _build/html/ || echo "_build/html NOT FOUND"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
