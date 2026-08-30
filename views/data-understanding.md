@@ -47,7 +47,7 @@ Authenticated using device code flow.
 
 Langkah berikutnya adalah menentukan wilayah spesifik. Titik koordinat batas wilayah Lamongan (Poligon) didapatkan menggunakan alat bantu pemetaan [geojson.io](https://geojson.io) dengan menggambar kotak di atas wilayah.
 
-![Grafik Data](../../img/geojson.png)
+![Grafik Data](../img/geojson.png)
 
 Koordinat yang didapatkan dimasukkan ke dalam variabel Area of Interest. Satelit Sentinel-5P kemudian diminta untuk mengambil data polutan berdasarkan _bounding box_ wilayah tersebut.
 
@@ -86,7 +86,7 @@ s5 = connection.load_collection(
 ```
 Proses di jalankan batch job di server openEO, dan hasilnya dapat dipantau  melalui openEO Web Editor. [openEO editor](https://editor.openeo.org/?server=https%3A%2F%2Fopeneo.dataspace.copernicus.eu%2Fopeneo%2F1.2). Setelah diproses oleh server, output akan otomatis diunduh dalam format **CSV**.
 
-![Grafik Data](../../img/openeo_editor.png)
+![Grafik Data](../img/openeo_editor.png)
 
 ### Hasil CSV
 Disini memuat file CSV CO dan NO2 yang telah menggunakan pustaka Pandas. Dan disini kita hanya akan menampilkan 5 data teratas saja.
@@ -174,7 +174,7 @@ print(missing_value)
 ```
 
 Implementasi pada tools `Orange Data Mining`
-```{image} ../../img/missing_co.png
+```{image} ../img/missing_co.png
 :alt: Grafik Data
 :width: 100%
 :align: center
@@ -191,7 +191,7 @@ print(missing_value)
 
 Implementasi pada tools `Orange Data Mining`
 
-```{image} ../../img/missing_no2.png
+```{image} ../img/missing_no2.png
 :alt: Grafik Data
 :width: 100%
 :align: center
@@ -223,7 +223,7 @@ print("Jumlah outlier:", jumlah_outlier)
 
 Implementasi pada tools `Orange Data Mining`
 
-```{image} ../../img/outlier_co.png
+```{image} ../img/outlier_co.png
 :alt: Grafik Data
 :width: 100%
 :align: center
@@ -249,7 +249,7 @@ print("Jumlah outlier:", jumlah_outlier)
 
 Implementasi pada tools `Orange Data Mining`
 
-```{image} ../../img/outlier_no2.png
+```{image} ../img/outlier_no2.png
 :alt: Grafik Data
 :width: 100%
 :align: center
