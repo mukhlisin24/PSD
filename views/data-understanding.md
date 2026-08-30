@@ -119,54 +119,9 @@ df.head(5)
 
 Ketidaklengkapan data atau _missing values_ merujuk pada situasi di mana titik-titik pengamatan tertentu tidak memiliki nilai ukur yang tercatat. Dalam konteks observasi satelit berbasis deret waktu, hilangnya data tersebut adalah hal yang lumrah. Pemicu utamanya berkisar dari halangan fisis seperti awan tebal yang menutupi area pandang sensor, hingga pola pergerakan orbit satelit yang menyebabkan absennya perekaman wilayah tersebut pada hari-hari tertentu. Mengenali rumpang data ini adalah prasyarat mutlak sebelum proses analisis dieksekusi.
 
-Disini kita mengecek dua bentuk _missing values_:
+Disini kita mengecek missing values_:
+**Data yang Hilang**: Memeriksa jumlah nilai polutan yang kosong (`NaN`) pada record tanggal yang sudah terekam.
 
-1. **Tanggal yang Hilang**: Memastikan apakah ada urutan hari yang terlewat (bolong) dari rentang waktu awal hingga akhir (24 Agustus 2025 - 24 Agustus 2026).
-2. **Data yang Hilang**: Memeriksa jumlah nilai polutan yang kosong (`NaN`) pada record tanggal yang sudah terekam.
-
-### Tanggal Yang Hilang
-
-1. CO
-
-```{code-cell}
-import pandas as pd
-
-df = pd.read_csv("../../data/CO_lamongan.csv")
-df['date'] = pd.to_datetime(df['date'])
-
-# Buat rentang tanggal
-start_date = "2025-08-24"
-end_date   = "2026-08-24"
-full_range = pd.date_range(start=start_date, end=end_date, freq='D')
-
-# Cek tanggal yang hilang
-missing_dates = full_range.difference(df['date'])
-
-print(f"Jumlah hari missing: {len(missing_dates)}")
-print("Daftar tanggal missing:")
-print(missing_dates)
-```
-
-2. NO₂
-
-```{code-cell}
-import pandas as pd
-
-df = pd.read_csv("../../data/No2_lamongan.csv")
-df['date'] = pd.to_datetime(df['date'])
-
-# Buat rentang tanggal
-start_date = "2025-08-24"
-end_date   = "2026-08-24"
-full_range = pd.date_range(start=start_date, end=end_date, freq='D')
-
-# Cek tanggal yang hilang
-missing_dates = full_range.difference(df['date'])
-
-print(f"Jumlah hari missing: {len(missing_dates)}")
-print("Daftar tanggal missing:")
-print(missing_dates)
-```
 
 ### Data Yang Hilang
 
