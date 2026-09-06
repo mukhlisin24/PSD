@@ -5,8 +5,8 @@ format: jb-book
 root: views/initial
 chapters:
 - file: views/polutan
-  section:
-    - file: views/data-understanding
-    - file: views/busssiness-understanding
-    - file: views/deskrpsi
+  sections:
+  - file: views/data-understanding
+  - file: views/busssiness-understanding
+  - file: views/deskrpsi
 
