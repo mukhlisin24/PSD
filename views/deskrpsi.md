@@ -343,7 +343,7 @@ Pada halaman Aiven:
 
 Service PostgreSQL yang digunakan dalam proyek adalah:
 
-```{code-cell}
+```text
 Service : pg-f512d5
 Database: PostgreSQL
 ```
@@ -365,7 +365,7 @@ Sebelum menyambungkan koneksi melalui aplikasi apa pun, kita membutuhkan informa
    - **SSL mode:** `require`
 3. Pastikan Anda telah mengunduh sertifikat SSL (klik **Show** pada bagian _CA certificate_ kemudian unduh) apabila _client_ yang Anda gunakan mensyaratkannya.
 
-![Aiven PostgreSQL Console](../../img/aiven.png)
+![Aiven PostgreSQL Console](../img/aiven.png)
 
 ---
 
@@ -409,7 +409,7 @@ for file in files:
 
 > **Catatan:** Bagian `PASSWORD` pada `DATABASE_URL` diganti dengan password Aiven milik sendiri.
 
-## ![Aiven PostgreSQL Console](../../dataset.png)
+![Aiven PostgreSQL Console](../img/dataset.png)
 
 ## Langkah 4: Menyusun Alur Kerja (Workflow) di KNIME
 
@@ -427,7 +427,7 @@ Beralih menuju KNIME Analytics Platform guna menarik data dari database dan mela
    - Lakukan klik ganda pada **DB Table Selector**, kemudian pilih skema `public` serta tabel `psd_polutan_lamongan`.
 5. Klik kanan pada **DB Reader** lalu pilih opsi **Execute**. Jika prosesnya berhasil, lampu indikator di bagian bawah _node_ akan berubah menjadi hijau.
 
-![Alur Kerja Database dan Statistik di KNIME](../../img/knime_node.png)
+![Alur Kerja Database dan Statistik di KNIME](../img/knime_node.png)
 
 ---
 
@@ -444,7 +444,7 @@ Setelah data berhasil dimuat ke dalam KNIME, tahapan yang terakhir adalah menjal
    - **No. missings:** Menyatakan jumlah data yang kosong.
    - **Histogram:** Menyajikan visualisasi mengenai sebaran datanya.
 
-![Tabel Hasil Output Node Statistics](../../img/knime_statistik.png)
+![Tabel Hasil Output Node Statistics](../img/knime_statistik.png)
 
 ## Perhitungan Manual Statistik O3
 
