@@ -85,6 +85,38 @@ s5 = connection.load_collection(
 )
 ```
 
+### Memuat Data O3
+
+```{code-cell}
+s5 = connection.load_collection(
+    "SENTINEL_5P_L2",
+    temporal_extent=["2025-08-24", "2026-08-24"],
+    spatial_extent={
+        "west": 112.3602,
+        "south": -7.1799,
+        "east": 112.4855,
+        "north": -7.0641,
+    },
+    bands=["O3"],
+)
+```
+
+### Memuat Data SO2
+
+```{code-cell}
+s5 = connection.load_collection(
+    "SENTINEL_5P_L2",
+    temporal_extent=["2025-08-24", "2026-08-24"],
+    spatial_extent={
+        "west": 112.3602,
+        "south": -7.1799,
+        "east": 112.4855,
+        "north": -7.0641,
+    },
+    bands=["SO2"],
+)
+```
+
 Proses di jalankan batch job di server openEO, dan hasilnya dapat dipantau melalui openEO Web Editor. [openEO editor](https://editor.openeo.org/?server=https%3A%2F%2Fopeneo.dataspace.copernicus.eu%2Fopeneo%2F1.2). Setelah diproses oleh server, output akan otomatis diunduh dalam format **CSV**.
 
 ![Grafik Data](../img/openeo_editor.png)
@@ -114,6 +146,26 @@ df.head(5)
 ```
 
 ![Grafik Data](../img/data_no2.png)
+
+3. O3
+
+```{code-cell}
+:tags: [hide-input]
+df = pd.read_csv("../../data/O3_lamongan.csv")
+df.head(5)
+```
+
+![Grafik Data](../img/data_o3.png)
+
+4. SO2
+
+```{code-cell}
+:tags: [hide-input]
+df = pd.read_csv("../../data/SO2_lamongan.csv")
+df.head(5)
+```
+
+![Grafik Data](../img/data_so2.png)
 
 ## Data Kosong (Missing Values)
 
@@ -154,6 +206,38 @@ print(missing_value)
 Implementasi pada tools `Orange Data Mining`
 
 ```{image} ../img/missing_no2.png
+:alt: Grafik Data
+:width: 100%
+:align: center
+```
+
+3. O3
+
+```{code-cell}
+df = pd.read_csv("../../data/O3_lamongan.csv")
+missing_value = df['O3'].isna().sum()
+print(missing_value)
+```
+
+Implementasi pada tools `Orange Data Mining`
+
+```{image} ../img/missing_o3.png
+:alt: Grafik Data
+:width: 100%
+:align: center
+```
+
+4. SO2
+
+```{code-cell}
+df = pd.read_csv("../../data/SO2_lamongan.csv")
+missing_value = df['SO2'].isna().sum()
+print(missing_value)
+```
+
+Implementasi pada tools `Orange Data Mining`
+
+```{image} ../img/missing_so2.png
 :alt: Grafik Data
 :width: 100%
 :align: center
@@ -210,6 +294,56 @@ print("Jumlah outlier:", jumlah_outlier)
 Implementasi pada tools `Orange Data Mining`
 
 ```{image} ../img/outlier_no2.png
+:alt: Grafik Data
+:width: 100%
+:align: center
+```
+
+3. O₃
+
+```{code-cell}
+import pandas as pd
+from sklearn.ensemble import IsolationForest
+
+df = pd.read_csv("../../data/O3_lamongan.csv")
+df_clean = df.dropna(subset=['O3']).copy()
+
+model = IsolationForest(contamination=0.05, random_state=42) # contamination 0.05 = 5%
+pred = model.fit_predict(df_clean[['O3']])
+
+# Nilai -1 merepresentasikan outlier
+jumlah_outlier = (pred == -1).sum()
+print("Jumlah outlier:", jumlah_outlier)
+```
+
+Implementasi pada tools `Orange Data Mining`
+
+```{image} ../img/outlier_o3.png
+:alt: Grafik Data
+:width: 100%
+:align: center
+```
+
+4. SO2
+
+```{code-cell}
+import pandas as pd
+from sklearn.ensemble import IsolationForest
+
+df = pd.read_csv("../../data/SO2_lamongan.csv")
+df_clean = df.dropna(subset=['SO2']).copy()
+
+model = IsolationForest(contamination=0.05, random_state=42) # contamination 0.05 = 5%
+pred = model.fit_predict(df_clean[['SO2']])
+
+# Nilai -1 merepresentasikan outlier
+jumlah_outlier = (pred == -1).sum()
+print("Jumlah outlier:", jumlah_outlier)
+```
+
+Implementasi pada tools `Orange Data Mining`
+
+```{image} ../img/outlier_so2.png
 :alt: Grafik Data
 :width: 100%
 :align: center

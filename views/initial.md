@@ -1,3 +1,12 @@
+# Profil
+
+| Keterangan  | Informasi           |
+| ----------- | ------------------- |
+| NIM         | 240411100010        |
+| Nama        | Irwan Dwi Mukhlisin |
+| Mata Kuliah | Proyek Sains Data   |
+| Kelas       | IF 5B               |
+
 # Analisis Kualitas Udara Kabupaten Lamongan
 
 Selamat datang di proyek **Analisis Polutan Udara Kabupaten Lamongan** — sebuah studi sains data yang memanfaatkan data satelit **Copernicus Sentinel-5P** untuk memantau kualitas udara di wilayah Kabupaten Lamongan, Jawa Timur.
@@ -13,3 +22,4 @@ Gunakan menu di sebelah kiri untuk menjelajahi setiap bagian dari proyek ini:
 - **Polutan**: Deskripsi polutan yang dianalisis di Kabupaten Lamongan.
 - **Business Understanding**: Latar belakang, rumusan masalah, dan tujuan analisis.
 - **Data Understanding**: Proses pengumpulan dan pemahaman data satelit.
+- **DESKRIPSI**: Prenjelasan dekskrpisi statistik.

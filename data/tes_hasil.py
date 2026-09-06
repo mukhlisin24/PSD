@@ -3,7 +3,7 @@ import pandas as pd
 
 BASE_DIR = Path(__file__).resolve().parent
 
-df = pd.read_csv(BASE_DIR / "No2_lamongan.csv")
+df = pd.read_csv(BASE_DIR / "O3_lamongan.csv")
 
 print("Data berhasil dibaca!")
 print(df.head())
