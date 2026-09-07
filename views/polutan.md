@@ -8,8 +8,10 @@ Dalam studi ini, kualitas udara Kabupaten Lamongan dianalisis menggunakan data p
 
 Polutan yang menjadi fokus dalam analisis ini meliputi:
 
-* **Nitrogen Dioksida (NO₂)**, yang umumnya berkaitan dengan emisi dari kendaraan bermotor, aktivitas industri, dan proses pembakaran.
-* **Karbon Monoksida (CO)**, yang terutama dihasilkan dari proses pembakaran tidak sempurna, termasuk pembakaran bahan bakar dan biomassa.
+- **Nitrogen Dioksida (NO₂)**, yang umumnya berkaitan dengan emisi dari kendaraan bermotor, aktivitas industri, dan proses pembakaran.
+- **Karbon Monoksida (CO)**, yang terutama dihasilkan dari proses pembakaran tidak sempurna, termasuk pembakaran bahan bakar dan biomassa.
+- **Ozon (O3)**, gas beracun yang terbentuk ketika polutan dari kendaraan dan pabrik bereaksi dengan sinar matahari.
+- **Sulfur Dioksida (SO3)**, gas beracun dan tidak berwarna dengan bau menyengat yang menjadi salah satu polutan udara utama.
 
 Data konsentrasi polutan tersebut kemudian digunakan untuk melihat **pola perubahan kualitas udara di Kabupaten Lamongan berdasarkan waktu dan wilayah**. Hasil pengolahan data diharapkan dapat memberikan gambaran mengenai kondisi atmosfer di wilayah kajian serta menjadi dasar untuk melakukan eksplorasi lebih lanjut terhadap pola, tren, dan perubahan konsentrasi masing-masing polutan.
 

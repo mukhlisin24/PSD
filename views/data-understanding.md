@@ -16,7 +16,7 @@ kernelspec:
 
 ## Pengumpulan Data
 
-Langkah pertama yaitu mengumpulkan data polutan udara NO₂ dan CO. Dataset ini mengambil dari platform satelit [Copernicus Data Space Ecosystem](https://dataspace.copernicus.eu/).
+Langkah pertama yaitu mengumpulkan data polutan udara NO2,CO,O3 dan CO. Dataset ini mengambil dari platform satelit [Copernicus Data Space Ecosystem](https://dataspace.copernicus.eu/).
 
 ### Install Library & Autentikasi
 
