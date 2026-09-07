@@ -171,9 +171,8 @@ df.head(5)
 
 Ketidaklengkapan data atau _missing values_ merujuk pada situasi di mana titik-titik pengamatan tertentu tidak memiliki nilai ukur yang tercatat. Dalam konteks observasi satelit berbasis deret waktu, hilangnya data tersebut adalah hal yang lumrah. Pemicu utamanya berkisar dari halangan fisis seperti awan tebal yang menutupi area pandang sensor, hingga pola pergerakan orbit satelit yang menyebabkan absennya perekaman wilayah tersebut pada hari-hari tertentu. Mengenali rumpang data ini adalah prasyarat mutlak sebelum proses analisis dieksekusi.
 
-Disini kita mengecek missing values_:
+Disini kita mengecek missing values\_:
 **Data yang Hilang**: Memeriksa jumlah nilai polutan yang kosong (`NaN`) pada record tanggal yang sudah terekam.
-
 
 ### Data Yang Hilang
 
@@ -274,6 +273,12 @@ Implementasi pada tools `Orange Data Mining`
 :align: center
 ```
 
+```{image} ../img/grafik_outlier_co.png
+:alt: Grafik Data
+:width: 100%
+:align: center
+```
+
 2. NO₂
 
 ```{code-cell}
@@ -294,6 +299,12 @@ print("Jumlah outlier:", jumlah_outlier)
 Implementasi pada tools `Orange Data Mining`
 
 ```{image} ../img/outlier_no2.png
+:alt: Grafik Data
+:width: 100%
+:align: center
+```
+
+```{image} ../img/grafik_outlier_no2.png
 :alt: Grafik Data
 :width: 100%
 :align: center
@@ -324,6 +335,12 @@ Implementasi pada tools `Orange Data Mining`
 :align: center
 ```
 
+```{image} ../img/garfik_outlier_o3.png
+:alt: Grafik Data
+:width: 100%
+:align: center
+```
+
 4. SO2
 
 ```{code-cell}
@@ -344,6 +361,12 @@ print("Jumlah outlier:", jumlah_outlier)
 Implementasi pada tools `Orange Data Mining`
 
 ```{image} ../img/outlier_so2.png
+:alt: Grafik Data
+:width: 100%
+:align: center
+```
+
+```{image} ../img/grafik_outlier_so2.png
 :alt: Grafik Data
 :width: 100%
 :align: center
