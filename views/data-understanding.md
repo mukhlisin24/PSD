@@ -335,7 +335,7 @@ Implementasi pada tools `Orange Data Mining`
 :align: center
 ```
 
-```{image} ../img/garfik_outlier_o3.png
+```{image} ../img/grafik_outlier_o3.png
 :alt: Grafik Data
 :width: 100%
 :align: center
