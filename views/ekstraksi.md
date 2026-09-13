@@ -23,7 +23,7 @@ Missing value adalah kondisi ketika terdapat nilai yang tidak tersedia atau koso
 Pada penelitian ini, missing value perlu diperiksa karena dapat memengaruhi hasil analisis dan visualisasi data. Data yang memiliki nilai kosong dapat menyebabkan proses perhitungan statistik, pembuatan grafik, maupun proses deteksi outlier menjadi kurang optimal.
 Pada dataset kualitas udara, missing value dapat terjadi karena beberapa faktor, seperti data sensor yang tidak terekam, gangguan proses pengambilan data, atau adanya data yang tidak tersedia pada periode tertentu. Pada slide Data Understanding pada polutan CO yaitu sebanyak 76 data mising value. Dan disini saya akan menggunkan Interpolasi untuk menangani missing value.
 
-```
+```{code-cell}
 import pandas as pd
 
 # Membaca data
@@ -299,7 +299,7 @@ extracted_features_final.to_csv(f'data/polutan/{target_pollutant}_Lamongan_TSFEL
 
 ```{code-cell}
 :tags: [hide-input]
-df = pd.read_csv("/CO_Lamongan_TSFEL.csv")
+df = pd.read_csv("../data/CO_Lamongan_TSFEL.csv")
 df.head(5)
 ```
 
