@@ -151,7 +151,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-```{image} ../img/grafik_co.png
+```{image} ../img/grafik_outlier_coo.png
 :alt: Grafik Data
 :width: 100%
 :align: center
@@ -223,7 +223,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-```{image} ../img/grafik_outlier_coo.png
+```{image} ../img/grafik_co.png
 :alt: Grafik Data
 :width: 100%
 :align: center
@@ -309,7 +309,7 @@ print(f"Berhasil! Jumlah fitur yang diekstrak pada {target_pollutant}: {extracte
 extracted_features_final.to_csv(f'data/polutan/{target_pollutant}_Lamongan_TSFEL.csv', index=False)
 ```
 
-```{image} ../img/TSFEL.png
+```{image} ../img/TSEFL.png
 :alt: Grafik Data
 :width: 100%
 :align: center
