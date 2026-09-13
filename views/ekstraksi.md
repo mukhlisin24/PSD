@@ -50,7 +50,7 @@ print("\nMissing value setelah imputasi:")
 print(df["CO"].isnull().sum())
 ```
 
-```{image} ../img/jumlah_missing_co.png
+```{image} ../img/jumlah_outlier_co.png
 :alt: Grafik Data
 :width: 100%
 :align: center
@@ -151,6 +151,12 @@ plt.tight_layout()
 plt.show()
 ```
 
+```{image} ../img/grafik_outlier_co.png
+:alt: Grafik Data
+:width: 100%
+:align: center
+```
+
 ### Penanganan Outlier dan Interpolasi Data
 
 Setelah mendeteksi keberadaan outlier, langkah selanjutnya adalah menandainya sebagai nilai kosong (NaN). Kemudian, metode interpolasi linier diterapkan pada keseluruhan dataset untuk mengisi nilai kosong (NaN) tersebut. Di akhir proses, teknik backward fill serta forward fill dimanfaatkan guna mengatasi nilai kosong pada bagian awalan atau akhiran rangkaian data yang tidak bisa diinterpolasi linier.
@@ -215,6 +221,12 @@ plt.legend()
 plt.grid(True, alpha=0.3)
 plt.tight_layout()
 plt.show()
+```
+
+```{image} ../img/tsfel.png
+:alt: Grafik Data
+:width: 100%
+:align: center
 ```
 
 ## Ekstraksi Titur Time Series
