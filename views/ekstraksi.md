@@ -223,7 +223,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-```{image} ../img/grafik_coo.png
+```{image} ../img/grafik_outlier_coo.png
 :alt: Grafik Data
 :width: 100%
 :align: center
