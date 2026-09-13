@@ -50,7 +50,7 @@ print("\nMissing value setelah imputasi:")
 print(df["CO"].isnull().sum())
 ```
 
-```{image} ../img/jumlah_outlier_co.png
+```{image} ../img/jumlah_missing_co.png
 :alt: Grafik Data
 :width: 100%
 :align: center
@@ -93,7 +93,7 @@ print("\nData Outlier:")
 print(df[df["status"] == "Outlier"][["date", "CO"]])
 ```
 
-```{image} ../img/missing_no2.png
+```{image} ../img/jumlah_outlier_co.png
 :alt: Grafik Data
 :width: 100%
 :align: center
@@ -223,7 +223,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-```{image} ../img/tsfel.png
+```{image} ../img/grafik_coo.png
 :alt: Grafik Data
 :width: 100%
 :align: center
@@ -309,10 +309,10 @@ print(f"Berhasil! Jumlah fitur yang diekstrak pada {target_pollutant}: {extracte
 extracted_features_final.to_csv(f'data/polutan/{target_pollutant}_Lamongan_TSFEL.csv', index=False)
 ```
 
-```{code-cell}
-:tags: [hide-input]
-df = pd.read_csv("../data/CO_Lamongan_TSFEL.csv")
-df.head(5)
+```{image} ../img/tsfel.png
+:alt: Grafik Data
+:width: 100%
+:align: center
 ```
 
 # Penjelasan Domain Fitur TSFEL
