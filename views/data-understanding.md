@@ -252,17 +252,47 @@ Dalam upaya mendeteksi anomali tersebut di fase pemahaman data, kita memanfaatka
 
 ```{code-cell}
 import pandas as pd
+import matplotlib.pyplot as plt
 from sklearn.ensemble import IsolationForest
 
-df = pd.read_csv("../../data/CO_lamongan.csv")
-df_clean = df.dropna(subset=['CO']).copy()
+# Membaca data
+df = pd.read_csv("CO_lamongan.csv")
 
-model = IsolationForest(contamination=0.05, random_state=42) # contamination 0.05 = 5%
-pred = model.fit_predict(df_clean[['CO']])
+# Cleaning
+df["date"] = pd.to_datetime(df["date"], errors="coerce")
+df["CO"] = pd.to_numeric(df["CO"], errors="coerce")
 
-# Nilai -1 merepresentasikan outlier
-jumlah_outlier = (pred == -1).sum()
-print("Jumlah outlier:", jumlah_outlier)
+df_clean = (
+    df.dropna(subset=["date", "CO"])
+      .sort_values("date")
+      .reset_index(drop=True)
+)
+
+# Isolation Forest
+model = IsolationForest(contamination=0.05, random_state=42)
+df_clean["outlier"] = model.fit_predict(df_clean[["CO"]])
+
+outliers = df_clean[df_clean["outlier"] == -1]
+
+# Grafik
+plt.figure(figsize=(15, 5))
+plt.plot(df_clean["date"], df_clean["CO"], linewidth=1, label="CO")
+plt.scatter(
+    outliers["date"],
+    outliers["CO"],
+    color="red",
+    s=35,
+    label="Outlier",
+    zorder=5
+)
+
+plt.title("Deteksi Outlier Data CO Lamongan")
+plt.xlabel("Tanggal")
+plt.ylabel("Kadar CO")
+plt.legend()
+plt.tight_layout()
+plt.show()
+
 ```
 
 Implementasi pada tools `Orange Data Mining`
@@ -274,6 +304,12 @@ Implementasi pada tools `Orange Data Mining`
 ```
 
 ```{image} ../img/grafik_outlier_co.png
+:alt: Grafik Data
+:width: 100%
+:align: center
+```
+
+```{image} ../img/scater_plot_co.png
 :alt: Grafik Data
 :width: 100%
 :align: center
@@ -310,21 +346,57 @@ Implementasi pada tools `Orange Data Mining`
 :align: center
 ```
 
+```{image} ../img/scater_plot_no2.png
+:alt: Grafik Data
+:width: 100%
+:align: center
+```
+
 3. O₃
 
 ```{code-cell}
 import pandas as pd
+import pandas as pd
+import matplotlib.pyplot as plt
 from sklearn.ensemble import IsolationForest
 
-df = pd.read_csv("../../data/O3_lamongan.csv")
-df_clean = df.dropna(subset=['O3']).copy()
+# Membaca data
+df = pd.read_csv("O3_lamongan.csv")
 
-model = IsolationForest(contamination=0.05, random_state=42) # contamination 0.05 = 5%
-pred = model.fit_predict(df_clean[['O3']])
+# Cleaning
+df["date"] = pd.to_datetime(df["date"], errors="coerce")
+df["O3"] = pd.to_numeric(df["O3"], errors="coerce")
 
-# Nilai -1 merepresentasikan outlier
-jumlah_outlier = (pred == -1).sum()
-print("Jumlah outlier:", jumlah_outlier)
+df_clean = (
+    df.dropna(subset=["date", "O3"])
+      .sort_values("date")
+      .reset_index(drop=True)
+)
+
+# Isolation Forest
+model = IsolationForest(contamination=0.05, random_state=42)
+df_clean["outlier"] = model.fit_predict(df_clean[["O3"]])
+
+outliers = df_clean[df_clean["outlier"] == -1]
+
+# Grafik
+plt.figure(figsize=(15, 5))
+plt.plot(df_clean["date"], df_clean["O3"], linewidth=1, label="O3")
+plt.scatter(
+    outliers["date"],
+    outliers["O3"],
+    color="red",
+    s=35,
+    label="Outlier",
+    zorder=5
+)
+
+plt.title("Deteksi Outlier Data O3 Lamongan")
+plt.xlabel("Tanggal")
+plt.ylabel("Kadar O3")
+plt.legend()
+plt.tight_layout()
+plt.show()
 ```
 
 Implementasi pada tools `Orange Data Mining`
@@ -341,21 +413,56 @@ Implementasi pada tools `Orange Data Mining`
 :align: center
 ```
 
+```{image} ../img/scater_plot_o3.png
+:alt: Grafik Data
+:width: 100%
+:align: center
+```
+
 4. SO2
 
 ```{code-cell}
 import pandas as pd
+import matplotlib.pyplot as plt
 from sklearn.ensemble import IsolationForest
 
-df = pd.read_csv("../../data/SO2_lamongan.csv")
-df_clean = df.dropna(subset=['SO2']).copy()
+# Membaca data
+df = pd.read_csv("So2_lamongan.csv")
 
-model = IsolationForest(contamination=0.05, random_state=42) # contamination 0.05 = 5%
-pred = model.fit_predict(df_clean[['SO2']])
+# Cleaning
+df["date"] = pd.to_datetime(df["date"], errors="coerce")
+df["SO2"] = pd.to_numeric(df["SO2"], errors="coerce")
 
-# Nilai -1 merepresentasikan outlier
-jumlah_outlier = (pred == -1).sum()
-print("Jumlah outlier:", jumlah_outlier)
+df_clean = (
+    df.dropna(subset=["date", "SO2"])
+      .sort_values("date")
+      .reset_index(drop=True)
+)
+
+# Isolation Forest
+model = IsolationForest(contamination=0.05, random_state=42)
+df_clean["outlier"] = model.fit_predict(df_clean[["SO2"]])
+
+outliers = df_clean[df_clean["outlier"] == -1]
+
+# Grafik
+plt.figure(figsize=(15, 5))
+plt.plot(df_clean["date"], df_clean["SO2"], linewidth=1, label="SO2")
+plt.scatter(
+    outliers["date"],
+    outliers["SO2"],
+    color="red",
+    s=35,
+    label="Outlier",
+    zorder=5
+)
+
+plt.title("Deteksi Outlier Data SO2 Lamongan")
+plt.xlabel("Tanggal")
+plt.ylabel("Kadar SO2")
+plt.legend()
+plt.tight_layout()
+plt.show()
 ```
 
 Implementasi pada tools `Orange Data Mining`
@@ -367,6 +474,12 @@ Implementasi pada tools `Orange Data Mining`
 ```
 
 ```{image} ../img/grafik_outlier_so2.png
+:alt: Grafik Data
+:width: 100%
+:align: center
+```
+
+```{image} ../img/scater_plot_so2.png
 :alt: Grafik Data
 :width: 100%
 :align: center
