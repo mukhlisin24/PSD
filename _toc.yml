@@ -9,4 +9,4 @@ chapters:
       - file: views/busssiness-understanding
       - file: views/data-understanding
       - file: views/deskrpsi
-      - file: views/ekstraksi
+      - file: notebooks/ekstraksi

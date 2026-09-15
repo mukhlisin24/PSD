@@ -13,7 +13,7 @@ Selamat datang di proyek **Analisis Polutan Udara Kabupaten Lamongan** — sebua
 
 ## Tentang Proyek
 
-Proyek ini menganalisis konsentrasi polutan udara utama, yaitu **Nitrogen Dioksida (NO₂)** dan **Karbon Monoksida (CO)**, dengan tujuan memahami pola perubahan kualitas udara berdasarkan waktu dan wilayah.
+Proyek ini menganalisis konsentrasi polutan udara utama, yaitu **Nitrogen Dioksida (NO₂)**, **Sulfur dioksida (SO₂)**,**Ozon (O₃)**, **Karbon Monoksida (CO)**, dengan tujuan memahami pola perubahan kualitas udara berdasarkan waktu dan wilayah.
 
 ## Navigasi
 

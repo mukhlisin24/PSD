@@ -415,3 +415,381 @@ Fitur-fitur yang digunakan dalam domain ini antara lain:
 - **`wavelet_var`**: Menghitung varians dari koefisien wavelet.
 
 Analisis spektral dapat membantu mengidentifikasi pola periodik pada data polutan. Informasi tersebut dapat melengkapi hasil analisis statistik dan temporal sehingga karakteristik deret waktu dapat dipahami dari beberapa sisi.
+
+### Rumus dan Perhitungan Beberapa Fitur TSFEL
+
+Untuk memahami proses ekstraksi fitur menggunakan TSFEL, beberapa fitur dapat dihitung secara manual menggunakan data deret waktu sederhana. Perhitungan manual ini digunakan untuk menunjukkan bagaimana nilai fitur diperoleh dari sekumpulan data polutan.
+
+Sebagai contoh, digunakan lima data pengamatan konsentrasi polutan sebagai berikut:
+
+| Hari | Nilai Polutan |
+| ---- | ------------: |
+| 1    |             2 |
+| 2    |             4 |
+| 3    |             5 |
+| 4    |             7 |
+| 5    |             8 |
+
+Sehingga diperoleh data:
+
+$$
+X = [2,4,5,7,8]
+$$
+
+Jumlah data:
+
+$$
+n = 5
+$$
+
+## 1. Mean (`calc_mean`)
+
+### Pengertian
+
+Mean atau rata-rata digunakan untuk mengetahui nilai pusat dari seluruh data pengamatan.
+
+### Rumus
+
+$$
+\bar{x} = \frac{\sum_{i=1}^{n}x_i}{n}
+$$
+
+Keterangan:
+
+- $\bar{x}$ = nilai rata-rata
+- $x_i$ = nilai pengamatan ke-$i$
+- $n$ = jumlah data
+
+### Perhitungan
+
+Data yang digunakan:
+
+$$
+2,4,5,7,8
+$$
+
+Jumlah seluruh data:
+
+$$
+2+4+5+7+8=26
+$$
+
+Jumlah data:
+
+$$
+n=5
+$$
+
+Maka:
+
+$$
+\bar{x}=\frac{26}{5}
+$$
+
+$$
+\bar{x}=5.2
+$$
+
+### Hasil
+
+Nilai **mean = 5,2**.
+
+Artinya, rata-rata konsentrasi polutan pada lima pengamatan tersebut adalah **5,2**.
+
+## 2. Median (`calc_median`)
+
+### Pengertian
+
+Median merupakan nilai yang berada di posisi tengah setelah seluruh data disusun dari nilai terkecil hingga terbesar.
+
+### Rumus
+
+Jika jumlah data ganjil:
+
+$$
+Median = x_{\frac{n+1}{2}}
+$$
+
+### Perhitungan
+
+Data sudah disusun dari terkecil hingga terbesar:
+
+$$
+2,4,5,7,8
+$$
+
+Jumlah data:
+
+$$
+n=5
+$$
+
+Posisi median:
+
+$$
+\frac{5+1}{2}=3
+$$
+
+Maka nilai pada posisi ke-3 adalah:
+
+$$
+Median=5
+$$
+
+### Hasil
+
+Nilai **median = 5**.
+
+Median menunjukkan nilai tengah dari kumpulan data setelah data diurutkan.
+
+## 3. Varians (`calc_var`)
+
+### Pengertian
+
+Varians digunakan untuk mengetahui seberapa besar penyebaran nilai data terhadap rata-ratanya.
+
+Untuk perhitungan populasi, rumus varians adalah:
+
+$$
+\sigma^2 = \frac{\sum_{i=1}^{n}(x_i-\bar{x})^2}{n}
+$$
+
+Keterangan:
+
+- $\sigma^2$ = varians
+- $x_i$ = nilai pengamatan
+- $\bar{x}$ = rata-rata
+- $n$ = jumlah data
+
+### Perhitungan
+
+Diketahui:
+
+$$
+\bar{x}=5.2
+$$
+
+Selanjutnya hitung selisih setiap nilai dengan rata-rata.
+
+| Nilai ($x_i$) | $x_i-\bar{x}$ | $(x_i-\bar{x})^2$ |
+| ------------: | ------------: | ----------------: |
+|             2 |          -3,2 |             10,24 |
+|             4 |          -1,2 |              1,44 |
+|             5 |          -0,2 |              0,04 |
+|             7 |           1,8 |              3,24 |
+|             8 |           2,8 |              7,84 |
+
+Jumlah kuadrat selisih:
+
+$$
+10.24+1.44+0.04+3.24+7.84=22.80
+$$
+
+Maka:
+
+$$
+\sigma^2=\frac{22.80}{5}
+$$
+
+$$
+\sigma^2=4.56
+$$
+
+### Hasil
+
+Nilai **varians = 4,56**.
+
+Semakin besar nilai varians, semakin besar pula penyebaran data terhadap rata-ratanya.
+
+> **Catatan:** Jika menggunakan varians sampel, penyebutnya adalah $n-1$, bukan $n$. Oleh karena itu hasilnya akan berbeda.
+
+## 4. Standar Deviasi (`calc_std`)
+
+### Pengertian
+
+Standar deviasi merupakan akar kuadrat dari varians. Fitur ini menunjukkan tingkat penyebaran data dalam satuan yang sama dengan data aslinya.
+
+### Rumus
+
+$$
+\sigma = \sqrt{\frac{\sum_{i=1}^{n}(x_i-\bar{x})^2}{n}}
+$$
+
+Karena sebelumnya telah diperoleh:
+
+$$
+\sigma^2=4.56
+$$
+
+Maka:
+
+$$
+\sigma=\sqrt{4.56}
+$$
+
+$$
+\sigma\approx2.14
+$$
+
+### Hasil
+
+Nilai **standar deviasi ≈ 2,14**.
+
+Artinya, nilai pengamatan memiliki penyebaran sekitar **2,14 satuan** dari nilai rata-ratanya.
+
+## 5. Root Mean Square (`rms`)
+
+### Pengertian
+
+RMS (_Root Mean Square_) digunakan untuk mengetahui besarnya nilai sinyal dengan menghitung akar dari rata-rata kuadrat seluruh nilai.
+
+Fitur ini berbeda dengan mean karena setiap nilai terlebih dahulu dikuadratkan.
+
+### Rumus
+
+$$
+RMS=\sqrt{\frac{\sum_{i=1}^{n}x_i^2}{n}}
+$$
+
+### Perhitungan
+
+Data:
+
+$$
+2,4,5,7,8
+$$
+
+Kuadrat setiap nilai:
+
+$$
+2^2=4
+$$
+
+$$
+4^2=16
+$$
+
+$$
+5^2=25
+$$
+
+$$
+7^2=49
+$$
+
+$$
+8^2=64
+$$
+
+Jumlah kuadrat:
+
+$$
+4+16+25+49+64=158
+$$
+
+Kemudian:
+
+$$
+RMS=\sqrt{\frac{158}{5}}
+$$
+
+$$
+RMS=\sqrt{31.6}
+$$
+
+$$
+RMS\approx5.62
+$$
+
+### Hasil
+
+Nilai **RMS ≈ 5,62**.
+
+RMS memberikan gambaran mengenai besarnya sinyal berdasarkan keseluruhan nilai pengamatan.
+
+## 6. Interquartile Range (`interq_range`)
+
+### Pengertian
+
+IQR (_Interquartile Range_) digunakan untuk mengukur rentang dari 50% data yang berada di bagian tengah distribusi.
+
+IQR juga sering digunakan dalam proses **identifikasi outlier**.
+
+### Rumus
+
+$$
+IQR=Q_3-Q_1
+$$
+
+Keterangan:
+
+- $Q_1$ = kuartil pertama
+- $Q_3$ = kuartil ketiga
+
+### Perhitungan
+
+Data:
+
+$$
+2,4,5,7,8
+$$
+
+Dengan metode kuartil yang umum digunakan pada perhitungan statistik:
+
+$$
+Q_1=4
+$$
+
+dan
+
+$$
+Q_3=7
+$$
+
+Sehingga:
+
+$$
+IQR=7-4
+$$
+
+$$
+IQR=3
+$$
+
+### Hasil
+
+Nilai **IQR = 3**.
+
+Nilai tersebut menunjukkan rentang penyebaran 50% data yang berada di bagian tengah.
+
+IQR juga dapat digunakan untuk menentukan batas outlier:
+
+$$
+Batas\ Bawah=Q_1-1.5(IQR)
+$$
+
+$$
+Batas\ Atas=Q_3+1.5(IQR)
+$$
+
+Dengan data di atas:
+
+$$
+Batas\ Bawah=4-1.5(3)
+$$
+
+$$
+Batas\ Bawah=-0.5
+$$
+
+Sedangkan:
+
+$$
+Batas\ Atas=7+1.5(3)
+$$
+
+$$
+Batas\ Atas=11.5
+$$
+
+Jadi, nilai yang berada di bawah **-0,5** atau di atas **11,5** dapat dikategorikan sebagai outlier berdasarkan metode IQR.

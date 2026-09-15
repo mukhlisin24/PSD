@@ -7,11 +7,13 @@ Kualitas udara yang baik atau buruk sangat dipengaruhi oleh keberadaan gas-gas d
 
 - **NO2 (Nitrogen Dioksida):** Gas beracun yang umumnya dihasilkan oleh pembakaran bahan bakar kendaraan bermotor dan emisi pabrik industri.
 - **CO (Karbon Monoksida):** Gas tidak berwarna dan tidak berbau yang beracun, berasal dari pembakaran tidak sempurna seperti dari knalpot kendaraan.
+- **Sulfur dioksida (SO₂)** adalah senyawa kimia berupa gas beracun yang tidak berwarna tetapi memiliki bau yang sangat menyengat, yang dihasilkan dari aktivitas vulkanik, pembakaran bahan bakar fosil, dan proses industri.
+- **Ozon (O₃)** adalah gas reaktif yang terdiri dari tiga atom oksigen, memiliki bau tajam, dan bersifat sebagai oksidator kuat.
 
 **Profil Wilayah: Kabupaten Lamongan**
 Kabupaten Lamongan adalah salah satu kabupaten yang terletak di Provinsi Jawa Timur, Indonesia. Wilayah ini memiliki karakteristik geografis dan ekonomi yang beragam, mulai dari kawasan pesisir di utara hingga dataran rendah yang didominasi oleh aktivitas pertanian, perikanan, perdagangan, serta sektor industri yang terus berkembang. Peningkatan volume kendaraan bermotor, operasional pabrik, dan aktivitas harian masyarakat di Lamongan berpotensi memengaruhi kondisi lingkungan, khususnya kualitas udara.
 
-Oleh karena itu, dari beberapa unsur polutan yang ada, studi di wilayah **Kabupaten Lamongan** ini akan berfokus **mengamati kadar NO2,CO,O3 dan CO** menggunakan tangkapan citra satelit untuk menganalisis kualitas udara setempat secara lebih mendalam.
+Oleh karena itu, dari beberapa unsur polutan yang ada, studi di wilayah **Kabupaten Lamongan** ini akan berfokus **mengamati kadar NO2,CO,O3 dan SO2** menggunakan tangkapan citra satelit untuk menganalisis kualitas udara setempat secara lebih mendalam.
 
 ## Data Understanding
 
