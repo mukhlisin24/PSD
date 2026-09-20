@@ -156,6 +156,159 @@ plt.show()
 :width: 100%
 :align: center
 ```
+###  Perbandingan Deteksi Outlier Metode Machine Learning (PyOD)
+
+Selain menerapkan pendekatan statistik konvensional seperti **Interquartile Range (IQR)** untuk mengidentifikasi data pencilan, analisis juga diperluas dengan membandingkan beberapa algoritma deteksi outlier yang tersedia dalam pustaka **PyOD**. Sebanyak **3 metode berbasis Machine Learning dan probabilitas** digunakan dalam pengujian. Ketiga metode tersebut memiliki pendekatan dan karakteristik algoritma yang berbeda dalam mengenali pola data yang dianggap tidak normal atau menyimpang dari data lainnya:
+- **KNN (*k-Nearest Neighbors*)**: Mengukur jarak suatu data ke k-tetangga terdekat. Jika jaraknya jauh, titik tersebut dianggap outlier.
+- **Isolation Forest**: Memisahkan data secara acak menggunakan pohon biner; titik anomali lebih cepat terisolasi.
+- **ECOD (*Empirical Cumulative Distribution Functions*)**: Menilai anomali berdasarkan fungsi distribusi kumulatif empiris pada ekor data.
+
+Berikut kode implementasi untuk deteksi outlier dengan metode PyOD :
+
+```
+import os
+import pandas as pd
+import numpy as np
+from sklearn.preprocessing import StandardScaler
+from pyod.models.knn import KNN
+from pyod.models.iforest import IForest
+from pyod.models.ecod import ECOD
+
+pollutants = ['CH4', 'CO', 'NO2', 'SO2']
+
+BULAN_MAP = {
+    1: 'Januari', 2: 'Februari', 3: 'Maret', 4: 'April', 5: 'Mei', 6: 'Juni', 
+    7: 'Juli', 8: 'Agustus', 9: 'September', 10: 'Oktober', 11: 'November', 12: 'Desember'
+}
+
+summary_dynamic = []
+
+for pol in pollutants:
+    # 1. Load Data
+    file_path = f"{pol}_lamongan_missing.csv"
+    if not os.path.exists(file_path):
+        file_path = f"data/{pol}_lamongan_missing.csv"
+    
+    df_p = pd.read_csv(file_path)
+    df_p['date'] = pd.to_datetime(df_p['date'])
+    df_valid = df_p.dropna(subset=[pol]).copy()
+    
+    # 2. Standarisasi Data
+    scaler = StandardScaler()
+    X_scaled = scaler.fit_transform(df_valid[[pol]].values)
+    
+    # 3. Model PyOD
+    models = {
+        'KNN': KNN(n_neighbors=5),
+        'Isolation Forest': IForest(random_state=42),
+        'ECOD': ECOD()
+    }
+    
+    print("=" * 75)
+    print(f"       DETEKSI OUTLIER DINAMIS (PyOD Anomaly Score) — {pol}")
+    print("=" * 75)
+    print(f"Total Data Valid: {len(df_valid)} hari\n")
+    
+    for name, model in models.items():
+        # Training model tanpa memaksakan fixed contamination
+        model.fit(X_scaled)
+        
+        # Ambil skor anomali kontinu (semakin tinggi = semakin anomali)
+        scores = model.decision_scores_
+        
+        # Threshold Dinamis: Nilai yang berada di luar mean + 2.5 * std deviasi skor anomali
+        dynamic_threshold = scores.mean() + (2.5 * scores.std())
+        
+        # Penentuan outlier secara dinamis
+        is_outlier = scores > dynamic_threshold
+        df_valid[f'outlier_{name}'] = is_outlier.astype(int)
+        
+        outliers_m = df_valid[df_valid[f'outlier_{name}'] == 1]
+        persen = (len(outliers_m) / len(df_valid)) * 100
+        
+        summary_dynamic.append({
+            "Polutan": pol,
+            "Metode": name,
+            "Total Data": len(df_valid),
+            "Jumlah Outlier": len(outliers_m),
+            "Persentase": f"{persen:.2f}%",
+            "Threshold Skor": f"{dynamic_threshold:.4f}"
+        })
+        
+        print(f">>> Metode: {name:<18} | Jumlah Outlier: {len(outliers_m)} hari ({persen:.2f}%)")
+        if len(outliers_m) > 0:
+            for idx, row in outliers_m.iterrows():
+                dt = row['date']
+                score_val = scores[df_valid.index.get_loc(idx)]
+                print(f"    • {dt.day:>2} {BULAN_MAP[dt.month]:<9} {dt.year} | Nilai: {row[pol]:.6g} (Skor Anomali: {score_val:.3f})")
+        else:
+            print("    (Tidak ditemukan data anomali ekstrem)")
+        print()
+```
+
+```
+import os
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler
+
+from pyod.models.knn import KNN
+from pyod.models.iforest import IForest
+from pyod.models.ecod import ECOD
+
+pollutants = ['CH4', 'CO', 'NO2', 'SO2']
+contamination_rate = 0.05
+
+# Visualisasi Subplot 3 Metode Outlier untuk Setiap Polutan
+for pol in pollutants:
+    # 1. Cek lokasi file
+    file_path = f"{pol}_lamongan_missing.csv" if os.path.exists(f"{pol}_lamongan_missing.csv") else f"data/{pol}_lamongan_missing.csv"
+    
+    df_p = pd.read_csv(file_path)
+    df_p['date'] = pd.to_datetime(df_p['date'])
+    df_valid_p = df_p.dropna(subset=[pol]).copy()
+    
+    # 2. Standarisasi data
+    scaler = StandardScaler()
+    X_p = scaler.fit_transform(df_valid_p[[pol]].values)
+    
+    # 3. Inisialisasi 3 Model yang Dipilih
+    models_p = {
+        'KNN': KNN(contamination=contamination_rate, n_neighbors=5),
+        'Isolation Forest': IForest(contamination=contamination_rate, random_state=42),
+        'ECOD': ECOD(contamination=contamination_rate)
+    }
+    
+    # 4. Buat Subplot 3 baris
+    fig, axes = plt.subplots(3, 1, figsize=(12, 8), sharex=True, dpi=120)
+    
+    for i, (name, model) in enumerate(models_p.items()):
+        model.fit(X_p)
+        labels = model.labels_
+        normal_m = df_valid_p[labels == 0]
+        outliers_m = df_valid_p[labels == 1]
+        
+        ax = axes[i]
+        # Garis data
+        ax.plot(df_valid_p['date'], df_valid_p[pol], color='#bdc3c7', linewidth=0.8, alpha=0.6, zorder=1)
+        # Titik normal (biru)
+        ax.scatter(normal_m['date'], normal_m[pol], color='#2980b9', s=18, alpha=0.7, label='Normal', zorder=2)
+        # Titik outlier (merah)
+        ax.scatter(outliers_m['date'], outliers_m[pol], color='#e74c3c', s=40, edgecolors='black', linewidths=0.6, 
+                   label=f'Outlier ({len(outliers_m)})', zorder=3)
+        
+        ax.set_title(f'Deteksi Outlier {pol} — Metode: {name}', fontsize=9, fontweight='bold')
+        ax.set_ylabel(pol, fontsize=8)
+        ax.legend(loc='upper right', fontsize=8)
+        ax.grid(True, linestyle=':', alpha=0.5)
+        
+    plt.xlabel('Tanggal', fontsize=9)
+    plt.suptitle(f'Grafik Deteksi Outlier (KNN, Isolation Forest, ECOD) — Polutan {pol}', fontsize=12, fontweight='bold', y=1.01)
+    plt.tight_layout()
+    plt.show()
+```
+
 
 ### Penanganan Outlier dan Interpolasi Data
 
@@ -793,3 +946,50 @@ Batas\ Atas=11.5
 $$
 
 Jadi, nilai yang berada di bawah **-0,5** atau di atas **11,5** dapat dikategorikan sebagai outlier berdasarkan metode IQR.
+
+# Evaluasi Perbandingan Clustering K-Means dan Deteksi Outlier
+
+Setelah diperoleh 272 fitur hasil ekstraksi TSFEL dari 19 sampel yang berasal dari masing-masing daerah atau mahasiswa, tahap selanjutnya adalah melakukan proses pengelompokan data menggunakan algoritma **K-Means**. Evaluasi clustering dilakukan dengan membandingkan dua skenario jumlah cluster, yaitu pengelompokan menjadi **2 cluster** dan pengelompokan menjadi **3 cluster**. Proses clustering dilakukan menggunakan dua pendekatan, yaitu data yang telah direduksi dimensinya menggunakan **PCA** dengan 19 komponen utama (PCA 0 hingga PCA 18) serta data yang tetap menggunakan keseluruhan fitur tanpa reduksi PCA. Perbandingan kedua pendekatan tersebut digunakan untuk melihat perbedaan hasil pengelompokan berdasarkan fitur yang telah direduksi dan fitur TSFEL secara keseluruhan.
+
+## Visualisasi Workflow KNIME & Scatter Plot Analytics Platform
+
+Proses ekstraksi, praprocessing, reduksi dimensi PCA, dan pengelompokan K-Means dijalankan menggunakan alur kerja (workflow) KNIME Analytics Platform:
+ 
+```{image} ../img/clustering.png
+:alt: Grafik Data
+:width: 100%
+:align: center
+```
+Hasil proses clustering yang diperoleh melalui alur KNIME kemudian divisualisasikan menggunakan **Scatter Plot**. Grafik tersebut digunakan untuk memperlihatkan posisi dan persebaran 19 sampel mahasiswa/daerah berdasarkan cluster yang terbentuk. Setiap titik pada grafik merepresentasikan satu sampel, sedangkan label atau warna yang berbeda menunjukkan kelompok (*cluster*) tempat sampel tersebut berada. Visualisasi ini membantu melihat pola pemisahan dan kedekatan antaranggota cluster secara lebih jelas.
+
+```{image} ../img/k2 pca.png
+:alt: Grafik Data
+:width: 100%
+:align: center
+```
+Berdasarkan hasil clustering menggunakan K-Means dengan reduksi dimensi PCA, data 19 mahasiswa/daerah terbagi menjadi dua kelompok. Sebanyak 18 sampel berada pada cluster_0, sedangkan 1 sampel, yaitu asal Burneh Bangkalan, berada pada cluster_1. Pemisahan satu sampel tersebut menunjukkan bahwa karakteristik fitur yang dimilikinya memiliki perbedaan yang cukup jauh dibandingkan dengan sampel lainnya sehingga membentuk kelompok tersendiri pada hasil clustering.
+
+```{image} ../img/k2 no pca.png
+:alt: Grafik Data
+:width: 100%
+:align: center
+```
+
+Pada pengelompokan menggunakan **K-Means dengan seluruh 272 fitur TSFEL yang telah dinormalisasi tanpa melalui reduksi PCA**, diperoleh pembagian cluster yang sama dengan skenario sebelumnya. Sebanyak **18 daerah** masuk ke dalam **`cluster_0`**, sementara **Burneh, Bangkalan** berada sendiri pada **`cluster_1`**. Hasil ini menunjukkan bahwa daerah tersebut tetap memiliki pola karakteristik yang berbeda dibandingkan 18 daerah lainnya, meskipun proses clustering dilakukan menggunakan seluruh fitur TSFEL tanpa reduksi dimensi.
+
+```{image} ../img/k5 pca.png
+:alt: Grafik Data
+:width: 100%
+:align: center
+```
+
+Pada skenario dengan jumlah cluster yang lebih banyak dan menggunakan reduksi dimensi **PCA**, hasil pengelompokan menjadi lebih terperinci. Dari 19 mahasiswa/daerah yang dianalisis, terbentuk **5 kelompok** dengan karakteristik yang berbeda. Sebagian besar sampel, yaitu **14 daerah**, terkumpul pada **`cluster_2`**. Sementara itu, empat daerah lainnya membentuk cluster secara terpisah, yaitu **Kraton, Bangkalan** pada **`cluster_4`**, **Kadur, Pamekasan** pada **`cluster_0`**, **Burneh, Bangkalan** pada **`cluster_1`**, serta **Sokobanah** pada **`cluster_3`**. Hasil tersebut menunjukkan bahwa peningkatan jumlah cluster menghasilkan pembagian kelompok yang lebih spesifik dibandingkan skenario dengan jumlah cluster yang lebih sedikit.
+
+```{image} ../img/k5 no pca.png
+:alt: Grafik Data
+:width: 100%
+:align: center
+```
+Pada skenario clustering menggunakan **272 fitur TSFEL secara keseluruhan tanpa menerapkan reduksi dimensi PCA**, diperoleh pola pengelompokan yang relatif sama dengan hasil pada skenario menggunakan PCA. Dari 19 daerah, sebagian besar data tergabung dalam **satu cluster utama**, sedangkan empat daerah lainnya masing-masing membentuk **cluster tersendiri**. Dengan demikian, penggunaan seluruh fitur TSFEL tetap menghasilkan pemisahan terhadap beberapa daerah yang memiliki karakteristik berbeda dari kelompok utama.
+
+

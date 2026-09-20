@@ -8,5 +8,5 @@ chapters:
     sections:
       - file: views/busssiness-understanding
       - file: views/data-understanding
-      - file: views/deskrpsi
+      - file: notebooks/deskrpsi
       - file: notebooks/ekstraksi
