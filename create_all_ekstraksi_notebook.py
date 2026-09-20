@@ -195,47 +195,54 @@ from pyod.models.knn import KNN
 from pyod.models.iforest import IForest
 from pyod.models.ecod import ECOD
 
-summary_pyod = []
+BULAN_MAP = {
+    1: 'Januari', 2: 'Februari', 3: 'Maret', 4: 'April', 5: 'Mei', 6: 'Juni', 
+    7: 'Juli', 8: 'Agustus', 9: 'September', 10: 'Oktober', 11: 'November', 12: 'Desember'
+}
 
 for polutan, df in dfs_imputed.items():
     df_valid = df.dropna(subset=[polutan]).copy()
     
+    # Standarisasi data
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(df_valid[[polutan]].values)
     
     models = {
-        'KNN': KNN(contamination=0.05, n_neighbors=5),
-        'Isolation Forest': IForest(contamination=0.05, random_state=42),
-        'ECOD': ECOD(contamination=0.05)
+        'KNN': KNN(n_neighbors=5),
+        'Isolation Forest': IForest(random_state=42),
+        'ECOD': ECOD()
     }
     
+    print("=" * 75)
+    print(f"       DETEKSI OUTLIER DINAMIS (PyOD Anomaly Score) — {polutan}")
+    print("=" * 75)
+    print(f"Total Data Valid: {len(df_valid)} hari\\n")
+    
     for name, model in models.items():
+        # Training model
         model.fit(X_scaled)
-        pred = model.labels_
-        outliers_count = int((pred == 1).sum())
-        persen = (outliers_count / len(df_valid)) * 100
         
-        summary_pyod.append({
-            "Polutan": polutan,
-            "Metode": name,
-            "Total Data": len(df_valid),
-            "Jumlah Outlier": outliers_count,
-            "Persentase": f"{persen:.2f}%",
-            "Threshold Skor": f"{model.threshold_:.4f}"
-        })
-
-df_summary_pyod = pd.DataFrame(summary_pyod)
-print("=" * 80)
-print("     TABEL PERBANDINGAN DETEKSI OUTLIER METODE MACHINE LEARNING (PyOD)")
-print("=" * 80)
-display(df_summary_pyod.style
-    .set_properties(**{'text-align': 'center'})
-    .set_table_styles([
-        {'selector': 'th', 'props': [('background-color', '#2c3e50'), ('color', 'white'), ('font-size', '12px'), ('text-align', 'center')]},
-        {'selector': 'td', 'props': [('font-size', '12px')]},
-        {'selector': 'tr:nth-child(even)', 'props': [('background-color', '#f8f9fa')]}
-    ])
-)"""
+        # Ambil skor anomali kontinu (semakin tinggi = semakin anomali)
+        scores = model.decision_scores_
+        
+        # Threshold Dinamis: Nilai di luar mean + 2.5 * std
+        dynamic_threshold = scores.mean() + (2.5 * scores.std())
+        
+        is_outlier = scores > dynamic_threshold
+        df_valid[f'outlier_{name}'] = is_outlier.astype(int)
+        
+        outliers_m = df_valid[df_valid[f'outlier_{name}'] == 1]
+        persen = (len(outliers_m) / len(df_valid)) * 100
+        
+        print(f">>> Metode: {name:<18} | Jumlah Outlier: {len(outliers_m)} hari ({persen:.2f}%)")
+        if len(outliers_m) > 0:
+            for idx, row in outliers_m.iterrows():
+                dt = pd.to_datetime(row['date'])
+                score_val = scores[df_valid.index.get_loc(idx)]
+                print(f"    • {dt.day:>2} {BULAN_MAP[dt.month]:<9} {dt.year} | Nilai: {row[polutan]:.6g} (Skor Anomali: {score_val:.3f})")
+        else:
+            print("    (Tidak ditemukan data anomali ekstrem)")
+        print()"""
 
 cells.append(nbf.v4.new_code_cell(c3_pyod_table))
 
