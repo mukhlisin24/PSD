@@ -11,7 +11,7 @@ Proyek ini menggunakan dua jenis data utama: **data vektor** berupa poligon samp
 | Jenis Data | Format | Sumber | Deskripsi |
 |-----------|--------|--------|-----------|
 | Data Vektor (Poligon Sampel) | GeoJSON (`build.geojson`) | Digitasi manual | 250 poligon sampel tutupan lahan se-Jawa Timur |
-| Data Raster (Citra Satelit) | GeoTIFF (`.tif`) | Sentinel-2 Level-2A via Microsoft Planetary Computer | Citra multispektral 5 band dengan resolusi ~60m |
+| Data Raster (Citra Satelit) | GeoTIFF (`.tif`) | Sentinel-2 Level-2A via Microsoft Planetary Computer | Citra multispektral 6 band dengan resolusi ~60m |
 | Dataset Fitur | CSV | Hasil ekstraksi | Fitur spektral per piksel dari setiap poligon |
 
 ---
@@ -73,7 +73,7 @@ Citra satelit yang digunakan adalah **Sentinel-2 Level-2A** (Surface Reflectance
 | **Nama File** | `sentinel2_jatim.tif` |
 | **Ukuran File** | 257.14 MB |
 | **Dimensi Raster** | 6.210 × 3.797 piksel |
-| **Jumlah Band** | 5 band |
+| **Jumlah Band** | 6 band |
 | **Sistem Koordinat** | EPSG:32749 |
 | **Resolusi Spasial** | ~60 meter |
 | **Level Produk** | Level-2A (Bottom-of-Atmosphere Reflectance) |
