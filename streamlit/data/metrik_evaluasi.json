@@ -1,0 +1,60 @@
+{
+    "nama_model": "Random Forest",
+    "akurasi_pixel": 0.899955535793686,
+    "jumlah_pixel_test": 8996,
+    "jumlah_pixel_train": 27313,
+    "akurasi_poligon": 0.7608695652173914,
+    "jumlah_poligon_test": 46,
+    "kelas": [
+        "Hutan Biasa",
+        "Hutan Mangrove",
+        "Lahan Pertanian (Sawah)",
+        "Pemukiman (Built-up)",
+        "Perairan (Water Body)"
+    ],
+    "classification_report": {
+        "Hutan Biasa": {
+            "precision": 0.9530643910007758,
+            "recall": 0.9452423698384201,
+            "f1-score": 0.9491372650012877,
+            "support": 7798.0
+        },
+        "Hutan Mangrove": {
+            "precision": 0.978021978021978,
+            "recall": 0.8165137614678899,
+            "f1-score": 0.89,
+            "support": 218.0
+        },
+        "Lahan Pertanian (Sawah)": {
+            "precision": 0.2336448598130841,
+            "recall": 0.43103448275862066,
+            "f1-score": 0.30303030303030304,
+            "support": 116.0
+        },
+        "Pemukiman (Built-up)": {
+            "precision": 0.5264367816091954,
+            "recall": 0.9015748031496063,
+            "f1-score": 0.6647314949201741,
+            "support": 254.0
+        },
+        "Perairan (Water Body)": {
+            "precision": 0.6218097447795824,
+            "recall": 0.43934426229508194,
+            "f1-score": 0.5148895292987512,
+            "support": 610.0
+        },
+        "accuracy": 0.899955535793686,
+        "macro avg": {
+            "precision": 0.6625955510449232,
+            "recall": 0.7067419359019237,
+            "f1-score": 0.6643577184501033,
+            "support": 8996.0
+        },
+        "weighted avg": {
+            "precision": 0.9098851270359536,
+            "recall": 0.899955535793686,
+            "f1-score": 0.9018973232785148,
+            "support": 8996.0
+        }
+    }
+}

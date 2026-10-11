@@ -1,5 +1,17 @@
-_build
-_build/*
+# Jupyter Book build
 _build/
-.ipynb_checkpoints/data_nc/*.nc
+_build/*
+
+# Python & Checkpoints
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Large Datasets & GeoTIFF (Exceeds GitHub 100MB limit)
+*.tif
+*.tiff
+*.nc
+*.zip
+data/tif/
+uts/data/tif/
 data_nc/

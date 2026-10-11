@@ -1,0 +1,47 @@
+﻿poligon_id,kelas_aktual,prediksi,jumlah_piksel,status
+3,Pemukiman (Built-up),Pemukiman (Built-up),15,BENAR
+6,Pemukiman (Built-up),Pemukiman (Built-up),102,BENAR
+10,Pemukiman (Built-up),Pemukiman (Built-up),10,BENAR
+12,Pemukiman (Built-up),Pemukiman (Built-up),24,BENAR
+14,Pemukiman (Built-up),Pemukiman (Built-up),28,BENAR
+22,Pemukiman (Built-up),Pemukiman (Built-up),72,BENAR
+28,Pemukiman (Built-up),Lahan Pertanian (Sawah),3,SALAH
+34,Lahan Pertanian (Sawah),Lahan Pertanian (Sawah),58,BENAR
+36,Lahan Pertanian (Sawah),Pemukiman (Built-up),10,SALAH
+37,Lahan Pertanian (Sawah),Pemukiman (Built-up),11,SALAH
+46,Lahan Pertanian (Sawah),Perairan (Water Body),13,SALAH
+57,Lahan Pertanian (Sawah),Lahan Pertanian (Sawah),17,BENAR
+62,Perairan (Water Body),Hutan Biasa,332,SALAH
+65,Perairan (Water Body),Perairan (Water Body),149,BENAR
+67,Perairan (Water Body),Perairan (Water Body),25,BENAR
+68,Perairan (Water Body),Perairan (Water Body),59,BENAR
+83,Perairan (Water Body),Lahan Pertanian (Sawah),18,SALAH
+86,Perairan (Water Body),Perairan (Water Body),6,BENAR
+91,Hutan Mangrove,Hutan Mangrove,29,BENAR
+96,Hutan Mangrove,Hutan Mangrove,22,BENAR
+97,Hutan Mangrove,Hutan Mangrove,16,BENAR
+98,Hutan Mangrove,Hutan Mangrove,15,BENAR
+103,Hutan Mangrove,Hutan Biasa,3,SALAH
+109,Hutan Mangrove,Hutan Mangrove,6,BENAR
+115,Hutan Mangrove,Hutan Mangrove,68,BENAR
+117,Hutan Mangrove,Hutan Mangrove,25,BENAR
+127,Hutan Biasa,Hutan Biasa,187,BENAR
+130,Hutan Biasa,Hutan Biasa,57,BENAR
+134,Hutan Biasa,Hutan Biasa,1558,BENAR
+138,Hutan Biasa,Hutan Biasa,414,BENAR
+140,Hutan Biasa,Hutan Biasa,2000,BENAR
+142,Hutan Biasa,Hutan Biasa,778,BENAR
+148,Hutan Biasa,Hutan Biasa,483,BENAR
+172,Lahan Pertanian (Sawah),Pemukiman (Built-up),3,SALAH
+174,Lahan Pertanian (Sawah),Lahan Pertanian (Sawah),1,BENAR
+178,Lahan Pertanian (Sawah),Lahan Pertanian (Sawah),2,BENAR
+185,Lahan Pertanian (Sawah),Pemukiman (Built-up),1,SALAH
+192,Perairan (Water Body),Perairan (Water Body),3,BENAR
+196,Perairan (Water Body),Lahan Pertanian (Sawah),2,SALAH
+198,Perairan (Water Body),Perairan (Water Body),14,BENAR
+201,Perairan (Water Body),Hutan Biasa,2,SALAH
+214,Hutan Mangrove,Hutan Mangrove,30,BENAR
+223,Hutan Mangrove,Hutan Mangrove,4,BENAR
+238,Hutan Biasa,Hutan Biasa,640,BENAR
+242,Hutan Biasa,Hutan Biasa,1113,BENAR
+249,Hutan Biasa,Hutan Biasa,568,BENAR
