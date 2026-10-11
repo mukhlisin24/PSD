@@ -10,6 +10,9 @@ chapters:
       - file: views/data-understanding
       - file: notebooks/deskrpsi
       - file: notebooks/ekstraksi
+      - file: notebooks/ekstraksi_polinomial
+      - file: notebooks/klasifikasiLahan
+      
   - file: uts/pendahuluan
     sections:
       - file: uts/business_understanding
