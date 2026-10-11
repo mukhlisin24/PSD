@@ -1,6 +1,6 @@
 # Pendahuluan: Klasifikasi Tutupan Lahan Jawa Timur
 
-## Profil Mahasiswa
+## Profil 
 
 | Keterangan | Informasi |
 | :--- | :--- |
@@ -10,6 +10,7 @@
 | **Mata Kuliah** | Proyek Sains Data (PSD) |
 | **Kelas** | IF 5B |
 | **Topik Proyek** | Klasifikasi Tutupan Lahan (*Land Cover Classification*) Berbasis Citra Satelit |
+| **URL Aplikasi** | https://klasifikasi-tutupan-lahan-jatim.streamlit.app/ |
 
 ---
 

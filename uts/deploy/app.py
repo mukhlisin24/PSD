@@ -240,8 +240,9 @@ if menu == "Overview & Latar Belakang":
         ]
         for nama, warna, jml, ket in kelas_info:
             st.markdown(f"""
-            <div style="margin-bottom: 8px; padding: 8px 12px; border-left: 4px solid {warna}; background: #fdfdfd; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
-                <strong>{nama}</strong> ({jml}): {ket}
+            <div style="margin-bottom: 10px; padding: 12px 16px; border-left: 5px solid {warna}; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); border: 1px solid #e1e8ed;">
+                <div style="color: #1e272e; font-size: 0.95rem; font-weight: 700; margin-bottom: 4px;">{nama} <span style="color: #576574; font-size: 0.85rem; font-weight: 500;">({jml})</span></div>
+                <div style="color: #2f3542; font-size: 0.88rem; line-height: 1.4;">{ket}</div>
             </div>
             """, unsafe_allow_html=True)
 
@@ -274,7 +275,7 @@ if menu == "Overview & Latar Belakang":
 # ------------------------------------------------------------------------------
 # MENU 2: PETA KLASIFIKASI INTERAKTIF
 # ------------------------------------------------------------------------------
-elif menu == "🗺️ Peta Klasifikasi Interaktif":
+elif menu == "Peta Klasifikasi Interaktif":
     st.markdown('<div class="main-title">🗺️ Visualisasi Peta Spasial Interaktif</div>', unsafe_allow_html=True)
     st.markdown('<div class="sub-title">Eksplorasi peta evaluasi pengujian poligon dan peta tematik tutupan lahan se-Jawa Timur</div>', unsafe_allow_html=True)
 
@@ -308,7 +309,7 @@ elif menu == "🗺️ Peta Klasifikasi Interaktif":
 # ------------------------------------------------------------------------------
 # MENU 3: EVALUASI & PERFORMA MODEL
 # ------------------------------------------------------------------------------
-elif menu == "📈 Evaluasi & Performa Model":
+elif menu == "Evaluasi & Performa Model":
     st.markdown('<div class="main-title">📈 Evaluasi & Metrik Kinerja Model</div>', unsafe_allow_html=True)
     st.markdown('<div class="sub-title">Analisis akurasi, confusion matrix, classification report, dan feature importance</div>', unsafe_allow_html=True)
 
@@ -383,7 +384,7 @@ elif menu == "📈 Evaluasi & Performa Model":
 # ------------------------------------------------------------------------------
 # MENU 4: EKSPLORASI DATA UJI
 # ------------------------------------------------------------------------------
-elif menu == "📋 Eksplorasi Data Uji":
+elif menu == "Eksplorasi Data Uji":
     st.markdown('<div class="main-title">📋 Eksplorasi Data Uji & Hasil Prediksi</div>', unsafe_allow_html=True)
     st.markdown('<div class="sub-title">Pemeriksaan detail hasil klasifikasi pada tingkat piksel dan tingkat poligon</div>', unsafe_allow_html=True)
 
@@ -432,7 +433,7 @@ elif menu == "📋 Eksplorasi Data Uji":
 # ------------------------------------------------------------------------------
 # MENU 5: TENTANG & METODOLOGI
 # ------------------------------------------------------------------------------
-elif menu == "ℹ️ Tentang & Metodologi":
+elif menu == "Tentang & Metodologi":
     st.markdown('<div class="main-title">ℹ️ Tentang & Metodologi Proyek</div>', unsafe_allow_html=True)
     st.markdown('<div class="sub-title">Detail teknis alur sains data, sumber data, dan struktur repositori</div>', unsafe_allow_html=True)
 
