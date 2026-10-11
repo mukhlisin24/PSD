@@ -15,3 +15,4 @@ chapters:
       - file: uts/business_understanding
       - file: uts/data_understanding
       - file: uts/klasifikasi tutupan lahan jatim
+      - file: uts/PANDUAN_DEPLOY_STREAMLIT
